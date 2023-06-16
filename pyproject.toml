@@ -8,6 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pydantic = "^1.10.9"
 
 [tool.poetry.scripts]
 json-parser = "json_parser.__main__:main"
