@@ -36,7 +36,12 @@ class Lexer:
 
         raise types.LexerError(f'Cannot parse as int/float: {s}')
 
-    def parse_token(self, peek: str) -> types.Token:
+    def next_token(self) -> Optional[types.Token]:
+        peek: Optional[str] = self.chars.peek(None)
+
+        if not peek:
+            return None
+
         if peek.isspace():
             self.consume()
             return types.const.TokenWhiteSpace
@@ -87,14 +92,6 @@ class Lexer:
             return self.parse_string()
 
         raise types.LexerError(f'Unexpected char: {peek}')
-
-    def next_token(self) -> Optional[types.Token]:
-        peek = self.chars.peek(None)
-
-        if not peek:
-            return None
-
-        return self.parse_token(peek)
 
     def tokenize(self) -> list[types.Token]:
         res = []
