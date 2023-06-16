@@ -74,16 +74,22 @@ class Lexer:
             s = ''.join(more_itertools.take(4, self.chars))
             if s == 'null':
                 return types.const.TokenNull
+            else:
+                raise types.LexerError(f'Unexpected token: {s}')
 
         if peek == 't':
             s = ''.join(more_itertools.take(4, self.chars))
             if s == 'true':
                 return types.const.TokenTrue
+            else:
+                raise types.LexerError(f'Unexpected token: {s}')
 
         if peek == 'f':
             s = ''.join(more_itertools.take(5, self.chars))
             if s == 'false':
                 return types.const.TokenFalse
+            else:
+                raise types.LexerError(f'Unexpected token: {s}')
 
         if peek in ('-', '+', '.') or peek.isdigit():
             return self.parse_number()
