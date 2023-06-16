@@ -41,6 +41,21 @@ class Lexer:
             self.consume()
             return types.const.TokenColon
 
+        if peek == 'n':
+            s = ''.join(more_itertools.take(4, self.chars))
+            if s == 'null':
+                return types.const.TokenNull
+
+        if peek == 't':
+            s = ''.join(more_itertools.take(4, self.chars))
+            if s == 'true':
+                return types.const.TokenTrue
+
+        if peek == 'f':
+            s = ''.join(more_itertools.take(5, self.chars))
+            if s == 'false':
+                return types.const.TokenFalse
+
         raise types.LexerError(f'Unexpected char: {peek}')
 
     def next_token(self) -> Optional[types.Token]:
