@@ -11,8 +11,8 @@ class Lexer:
     def __init__(self, chars):
         self.chars = more_itertools.peekable(chars)
 
-    def consume(self) -> None:
-        next(self.chars)
+    def consume(self) -> str:
+        return next(self.chars)
 
     def parse_string(self) -> types.TokenString:
         self.consume()  # consume start "
