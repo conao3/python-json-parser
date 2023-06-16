@@ -102,10 +102,7 @@ class Lexer:
     def tokenize(self) -> list[types.Token]:
         res = []
         while (token := self.next_token()):
-            if (
-                token is types.const.TokenWhiteSpace or
-                isinstance(token, types.TokenWhiteSpace)
-            ):
+            if token is types.const.TokenWhiteSpace:
                 continue
 
             res.append(token)
