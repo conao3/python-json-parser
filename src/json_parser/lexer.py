@@ -15,31 +15,31 @@ class Lexer:
     def parse_token(self, peek: str) -> types.Token:
         if peek.isspace():
             self.consume()
-            return types.TokenWhiteSpace()
+            return types.const.TokenWhiteSpace
 
         if peek == '{':
             self.consume()
-            return types.TokenLeftBrace()
+            return types.const.TokenLeftBrace
 
         if peek == '}':
             self.consume()
-            return types.TokenRightBrace()
+            return types.const.TokenRightBrace
 
         if peek == '[':
             self.consume()
-            return types.TokenLeftBracket()
+            return types.const.TokenLeftBracket
 
         if peek == ']':
             self.consume()
-            return types.TokenRightBracket()
+            return types.const.TokenRightBracket
 
         if peek == ',':
             self.consume()
-            return types.TokenComma()
+            return types.const.TokenComma
 
         if peek == ':':
             self.consume()
-            return types.TokenColon()
+            return types.const.TokenColon
 
         raise types.LexerError(f'Unexpected char: {peek}')
 
@@ -54,7 +54,10 @@ class Lexer:
     def tokenize(self) -> list[types.Token]:
         res = []
         while (token := self.next_token()):
-            if isinstance(token, types.TokenWhiteSpace):
+            if (
+                token is types.const.TokenWhiteSpace or
+                isinstance(token, types.TokenWhiteSpace)
+            ):
                 continue
 
             res.append(token)

@@ -31,13 +31,12 @@ class TokenNumber(Token):
     value: float
 
 
-class TokenBooleanEnum(enum.Enum):
-    TRUE = enum.auto()
-    FALSE = enum.auto()
+class TokenTrue(Token):
+    pass
 
 
-class TokenConst(Token):
-    value: TokenBooleanEnum
+class TokenFalse(Token):
+    pass
 
 
 class TokenNull(Token):
@@ -70,3 +69,30 @@ class TokenColon(Token):
 
 class TokenWhiteSpace(Token):
     pass
+
+
+class Const(pydantic.BaseModel):
+    TokenTrue: TokenTrue
+    TokenFalse: TokenFalse
+    TokenNull: TokenNull
+    TokenLeftBrace: TokenLeftBrace
+    TokenRightBrace: TokenRightBrace
+    TokenLeftBracket: TokenLeftBracket
+    TokenRightBracket: TokenRightBracket
+    TokenComma: TokenComma
+    TokenColon: TokenColon
+    TokenWhiteSpace: TokenWhiteSpace
+
+
+const = Const(
+    TokenTrue=TokenTrue(),
+    TokenFalse=TokenFalse(),
+    TokenNull=TokenNull(),
+    TokenLeftBrace=TokenLeftBrace(),
+    TokenRightBrace=TokenRightBrace(),
+    TokenLeftBracket=TokenLeftBracket(),
+    TokenRightBracket=TokenRightBracket(),
+    TokenComma=TokenComma(),
+    TokenColon=TokenColon(),
+    TokenWhiteSpace=TokenWhiteSpace(),
+)
