@@ -54,6 +54,9 @@ class Lexer:
     def tokenize(self) -> list[types.Token]:
         res = []
         while (token := self.next_token()):
+            if isinstance(token, types.TokenWhiteSpace):
+                continue
+
             res.append(token)
 
         return res
