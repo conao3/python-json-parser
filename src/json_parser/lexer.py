@@ -21,7 +21,10 @@ class Lexer:
         return types.TokenString(value=s)
 
     def parse_number(self) -> types.TokenInteger | types.TokenFloat:
-        s = ''.join(itertools.takewhile(lambda c: not c.isspace(), self.chars))
+        def pred(c: str) -> bool:
+            return c in ('-', '+', '.', 'e', 'E') or c.isdigit()
+
+        s = ''.join(itertools.takewhile(pred, self.chars))
         i, _ = subr.trap(lambda: int(s))
         if i is not None:
             return types.TokenInteger(value=i)
