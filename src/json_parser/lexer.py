@@ -70,7 +70,7 @@ class Lexer:
             if s == 'false':
                 return types.const.TokenFalse
 
-        if peek in ('-', '+') or peek.isdigit():
+        if peek in ('-', '+', '.') or peek.isdigit():
             return self.parse_number()
 
         raise types.LexerError(f'Unexpected char: {peek}')
