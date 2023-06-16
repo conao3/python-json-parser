@@ -17,15 +17,11 @@ class ParserError(JsonParserError):
     pass
 
 
-class UnexpectedTokenError(ParserError):
-    pass
-
+## Tokens
 
 class Token(pydantic.BaseModel):
     pass
 
-
-## Tokens
 
 class TokenString(Token):
     value: str
@@ -69,4 +65,8 @@ class TokenComma(Token):
 
 
 class TokenColon(Token):
+    pass
+
+
+class TokenWhiteSpace(Token):
     pass
