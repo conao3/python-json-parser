@@ -12,17 +12,20 @@ class Lexer:
     def consume(self) -> None:
         next(self.chars)
 
+    def parse_token(self, peek: str) -> types.Token:
+        if peek.isspace():
+            self.consume()
+            return types.TokenWhiteSpace()
+
+        raise types.LexerError(f'Unexpected char: {peek}')
+
     def next_token(self) -> Optional[types.Token]:
         peek = self.chars.peek(None)
 
         if not peek:
             return None
 
-        if peek.isspace():
-            self.consume()
-            return types.TokenWhiteSpace()
-
-        raise types.LexerError(f'Unexpected char: {peek}')
+        return self.parse_token(peek)
 
     def tokenize(self) -> list[types.Token]:
         res = []
