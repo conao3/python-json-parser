@@ -24,7 +24,7 @@ class Lexer:
         def pred(c: str) -> bool:
             return c in ('-', '+', '.', 'e', 'E') or c.isdigit()
 
-        s = ''.join(itertools.takewhile(pred, self.chars))
+        s = ''.join(subr.takewhile_inclusive(pred, self.chars))
         i, _ = subr.trap(lambda: int(s))
         if i is not None:
             return types.TokenInteger(value=i)
