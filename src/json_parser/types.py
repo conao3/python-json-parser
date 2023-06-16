@@ -27,7 +27,11 @@ class TokenString(Token):
     value: str
 
 
-class TokenNumber(Token):
+class TokenInteger(Token):
+    value: int
+
+
+class TokenFloat(Token):
     value: float
 
 
