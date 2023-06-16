@@ -75,33 +75,6 @@ class TokenWhiteSpace(Token):
     pass
 
 
-class Const(pydantic.BaseModel):
-    TokenTrue: TokenTrue
-    TokenFalse: TokenFalse
-    TokenNull: TokenNull
-    TokenLeftBrace: TokenLeftBrace
-    TokenRightBrace: TokenRightBrace
-    TokenLeftBracket: TokenLeftBracket
-    TokenRightBracket: TokenRightBracket
-    TokenComma: TokenComma
-    TokenColon: TokenColon
-    TokenWhiteSpace: TokenWhiteSpace
-
-
-const = Const(
-    TokenTrue=TokenTrue(),
-    TokenFalse=TokenFalse(),
-    TokenNull=TokenNull(),
-    TokenLeftBrace=TokenLeftBrace(),
-    TokenRightBrace=TokenRightBrace(),
-    TokenLeftBracket=TokenLeftBracket(),
-    TokenRightBracket=TokenRightBracket(),
-    TokenComma=TokenComma(),
-    TokenColon=TokenColon(),
-    TokenWhiteSpace=TokenWhiteSpace(),
-)
-
-
 # Values
 
 class Value(pydantic.BaseModel):
@@ -138,3 +111,36 @@ class ValueFalse(Value):
 
 class ValueNull(Value):
     pass
+
+
+class Const(pydantic.BaseModel):
+    TokenTrue: TokenTrue
+    TokenFalse: TokenFalse
+    TokenNull: TokenNull
+    TokenLeftBrace: TokenLeftBrace
+    TokenRightBrace: TokenRightBrace
+    TokenLeftBracket: TokenLeftBracket
+    TokenRightBracket: TokenRightBracket
+    TokenComma: TokenComma
+    TokenColon: TokenColon
+    TokenWhiteSpace: TokenWhiteSpace
+    ValueTrue: ValueTrue
+    ValueFalse: ValueFalse
+    ValueNull: ValueNull
+
+
+const = Const(
+    TokenTrue=TokenTrue(),
+    TokenFalse=TokenFalse(),
+    TokenNull=TokenNull(),
+    TokenLeftBrace=TokenLeftBrace(),
+    TokenRightBrace=TokenRightBrace(),
+    TokenLeftBracket=TokenLeftBracket(),
+    TokenRightBracket=TokenRightBracket(),
+    TokenComma=TokenComma(),
+    TokenColon=TokenColon(),
+    TokenWhiteSpace=TokenWhiteSpace(),
+    ValueTrue=ValueTrue(),
+    ValueFalse=ValueFalse(),
+    ValueNull=ValueNull(),
+)
