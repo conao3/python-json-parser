@@ -21,9 +21,12 @@ class Parser:
 
     def parse_object(self) -> types.Value:
         self.consume()  # consume start {
-        d = {}
+        d: dict[str, types.Value] = {}
 
-        while (peek := self.tokens.peek(None)) is not types.const.TokenRightBrace:
+        if self.tokens.peek(None) is types.const.TokenRightBrace:
+            return types.ValueObject(value=d)
+
+        while True:
             key = self.expect(types.TokenString)
             _ = self.expect(types.TokenColon)
             val = self.parse()
@@ -33,9 +36,38 @@ class Parser:
 
             d[key.value] = val
 
+            if self.tokens.peek(None) is types.const.TokenRightBrace:
+                break
+
+            _ = self.expect(types.TokenComma)
+
         self.consume()  # consume end }
 
         return types.ValueObject(value=d)
+
+    def parse_array(self) -> types.Value:
+        self.consume()  # consume start [
+        l: list[types.Value] = []
+
+        if self.tokens.peek(None) is types.const.TokenRightBracket:
+            return types.ValueArray(value=l)
+
+        while True:
+            val = self.parse()
+
+            if not val:
+                raise types.ParserError(f'Expected value, got no value')
+
+            l.append(val)
+
+            if self.tokens.peek(None) is types.const.TokenRightBracket:
+                break
+
+            _ = self.expect(types.TokenComma)
+
+        self.consume()  # consume end ]
+
+        return types.ValueArray(value=l)
 
     def parse(self) -> Optional[types.Value]:
         peek: Optional[types.Token] = self.tokens.peek(None)
@@ -68,6 +100,12 @@ class Parser:
             return self.parse_object()
 
         if peek is types.const.TokenRightBrace:
+            raise types.ParserError(f'Unexpected token: {peek}')
+
+        if peek is types.const.TokenLeftBracket:
+            return self.parse_array()
+
+        if peek is types.const.TokenRightBracket:
             raise types.ParserError(f'Unexpected token: {peek}')
 
         return None
