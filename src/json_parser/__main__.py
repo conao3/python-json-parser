@@ -1,2 +1,6 @@
+from . import rep
+
+
 def main():
-    print('hello world')
+    while True:
+        print(rep.rep(input('user> ')))
