@@ -25,6 +25,7 @@ class Lexer:
             return c in ('-', '+', '.', 'e', 'E') or c.isdigit()
 
         s = ''.join(subr.takewhile_inclusive(pred, self.chars))
+
         i, _ = subr.trap(lambda: int(s))
         if i is not None:
             return types.TokenInteger(value=i)
