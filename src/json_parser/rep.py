@@ -1,5 +1,9 @@
+from . import lexer
+
+
 def read(arg: str) -> str:
-    return arg
+    lexer_ = lexer.Lexer(arg)
+    return str(lexer_.tokenize())
 
 
 def eval(arg: str) -> str:
