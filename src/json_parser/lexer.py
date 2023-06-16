@@ -39,7 +39,7 @@ class Lexer:
     def next_token(self) -> Optional[types.Token]:
         peek: Optional[str] = self.chars.peek(None)
 
-        if not peek:
+        if peek is None:
             return None
 
         if peek.isspace():
