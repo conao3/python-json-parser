@@ -14,6 +14,12 @@ class Lexer:
     def consume(self) -> None:
         next(self.chars)
 
+    def parse_string(self) -> types.TokenString:
+        self.consume()  # consume start "
+        s = ''.join(itertools.takewhile(lambda c: c != '"', self.chars))
+
+        return types.TokenString(value=s)
+
     def parse_number(self) -> types.TokenInteger | types.TokenFloat:
         s = ''.join(itertools.takewhile(lambda c: not c.isspace(), self.chars))
         i, _ = subr.trap(lambda: int(s))
@@ -72,6 +78,9 @@ class Lexer:
 
         if peek in ('-', '+', '.') or peek.isdigit():
             return self.parse_number()
+
+        if peek == '"':
+            return self.parse_string()
 
         raise types.LexerError(f'Unexpected char: {peek}')
 
