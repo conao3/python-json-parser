@@ -8,14 +8,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-pydantic = "^2.14.1"
+pydantic = "^2.14.2"
 more-itertools = "^11.2.1"
 
 [tool.poetry.scripts]
 json-parser = "json_parser.__main__:main"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^2.4.0"
+mypy = "^2.4.1"
 
 [build-system]
 requires = ["poetry-core"]
